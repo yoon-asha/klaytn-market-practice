@@ -34,14 +34,14 @@ export const setCount = (count, setQrvalue) => {
           .then((responce) => {
             if (responce.data.result) {
               console.log(`[RESULT] ${JSON.stringify(responce.data.result)}`);
-              // clearInterval(timerId);
+              clearInterval(timerId);
             }
           });
       }, 1000);
     });
 };
 
-export const getAddress = (setQrvalue) => {
+export const getAddress = (setQrvalue, callback) => {
   axios
     .post(A2A_API_PREPAER_URL, {
       bapp: {
@@ -63,6 +63,8 @@ export const getAddress = (setQrvalue) => {
           .then((responce) => {
             if (responce.data.result) {
               console.log(`[RESULT] ${JSON.stringify(responce.data.result)}`);
+              // console.log(responce.data.result.klaytn_address)
+              callback(responce.data.result.klaytn_address)
               clearInterval(timerId);
             }
           });
